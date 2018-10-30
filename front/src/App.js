@@ -1,14 +1,24 @@
 import React, { Component } from "react";
 import "./App.css";
-import AdressesList from "./AdressesList";
-import { Button } from "reactstrap";
+import Home from "./Home";
+import { Container, Button } from "reactstrap";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "./App.css";
 
 class App extends Component {
   constructor() {
     super();
     this.state = {
-      user: { name: "Mathieu", city: "reims", citycode: 0 },
-      adress: []
+      adress: [],
+      user: {
+        name: "Belzebute",
+        city: "Reims",
+        logoRace:
+          "https://banner2.kisspng.com/20180605/pe/kisspng-werewolf-the-apocalypse-gray-wolf-lycanthrope-5b174b545a6429.0270693815282532683703.jpg",
+        race: "Werewolf",
+        citycode: 0
+      },
+      candies: []
     };
     this.fetchAdressApi = this.fetchAdressApi.bind(this);
   }
@@ -65,7 +75,29 @@ class App extends Component {
       });
   }
 
+  fetchBonbonsApi() {
+    for (let i = 1; i < 6; i++) {
+      fetch(`https://fr.openfoodfacts.org/categorie/bonbons-gelifies/${i}.json`)
+        .then(results => results.json()) // conversion du résultat en JSON
+        .then(data => {
+          this.setState({
+            candies: [
+              ...this.state.candies,
+              ...data.products.map(candy => {
+                let newCandy = {};
+                newCandy.name = candy.product_name_fr;
+                newCandy.image = candy.image_url;
+                newCandy.brands = candy.brands;
+                return newCandy;
+              })
+            ]
+          });
+        });
+    }
+  }
+
   componentDidMount() {
+    this.fetchBonbonsApi();
     this.fetchCityCodeApi(this.state.user.city);
   }
 
@@ -75,7 +107,16 @@ class App extends Component {
         <Button onClick={() => this.fetchAdressApi(this.state.user.citycode)}>
           Test
         </Button>
-        <AdressesList adressesList={this.state.adress} />
+        <Container>
+          <Home
+            userName={this.state.user.name}
+            userCity={this.state.user.city}
+            userRace={this.state.user.race}
+            userLogo={this.state.user.logoRace}
+            candiesList={this.state.candies}
+            adressesList={this.state.adress}
+          />
+        </Container>
       </div>
     );
   }
