@@ -1,28 +1,8 @@
 import React, { Component } from "react";
-<<<<<<< HEAD
 
 import Welcome from "./Welcome";
 
-class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      user: {
-        name: "",
-        city: ""
-      }
-    };
-    this.handleChangeName = this.handleChangeName.bind(this);
-    this.handleChangeCity = this.handleChangeCity.bind(this);
-   
-  }
-  handleChangeName(event) {
-    this.setState({ user:{...this.state.user,name:event.target.value}});
-  }
 
-  handleChangeCity(event) {
-    this.setState({ user:{...this.state.user,city:event.target.value}});
-=======
 import "./App.css";
 import Masonry from "react-masonry-component";
 import classnames from "classnames";
@@ -60,8 +40,16 @@ class App extends Component {
     };
     this.fetchAdressApi = this.fetchAdressApi.bind(this);
     this.toggle = this.toggle.bind(this);
+
+    this.handleChangeName = this.handleChangeName.bind(this);
+    this.handleChangeCity = this.handleChangeCity.bind(this);
+  }
+  handleChangeName(event) {
+    this.setState({ user:{...this.state.user,name:event.target.value}});
   }
 
+  handleChangeCity(event) {
+    this.setState({ user:{...this.state.user,city:event.target.value}})};
   fetchCityCodeApi(cityName) {
     fetch(
       `https://geo.api.gouv.fr/communes?nom=${encodeURI(
@@ -149,16 +137,13 @@ class App extends Component {
   componentDidMount() {
     this.fetchBonbonsApi();
     this.fetchCityCodeApi(this.state.user.city);
->>>>>>> ae4bf106e83b45c00970f9b85a8cdc94ff020f85
   }
 
   render() {
     return (
-<<<<<<< HEAD
-      <div>
-        <Welcome handleChangeName={this.handleChangeName} handleChangeCity={this.handleChangeCity} />
-=======
       <div className="App">
+              <Welcome handleChangeName={this.handleChangeName} handleChangeCity={this.handleChangeCity} />
+
         <Button onClick={() => this.fetchAdressApi(this.state.user.citycode)}>
           Test
         </Button>
@@ -230,7 +215,6 @@ class App extends Component {
             </TabPane>
           </TabContent>
         </Container>
->>>>>>> ae4bf106e83b45c00970f9b85a8cdc94ff020f85
       </div>
     );
   }

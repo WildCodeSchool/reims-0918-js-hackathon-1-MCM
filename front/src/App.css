@@ -18,6 +18,10 @@
   color: white;
 }
 
+.jumbotron {
+  background: none;
+}
+
 .App-link {
   color: #61dafb;
 }
