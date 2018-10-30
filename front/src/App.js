@@ -25,7 +25,7 @@ class App extends Component {
       adress: [],
       user: {
         name: "Belzebute",
-        city: "Reims",
+        city: "reims",
         logoRace:
           "https://banner2.kisspng.com/20180605/pe/kisspng-werewolf-the-apocalypse-gray-wolf-lycanthrope-5b174b545a6429.0270693815282532683703.jpg",
         race: "Werewolf",
@@ -73,13 +73,15 @@ class App extends Component {
           if (labelAdresse[0] >= 0 && labelAdresse[0] <= 9) {
             let isAdresses = 0;
             for (let i = 0; i < this.state.adress.length; i++) {
-              if (this.state.adress[i].includes(labelAdresse)) {
+              if (
+                this.state.adress[i].properties.label.includes(labelAdresse)
+              ) {
                 isAdresses++;
               }
             }
             if (!isAdresses) {
               this.setState({
-                adress: [...this.state.adress, labelAdresse]
+                adress: [...this.state.adress, data.features[selectRandom]]
               });
               adresseListLength--;
             }
