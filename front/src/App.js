@@ -186,11 +186,11 @@ class App extends Component {
               <AdressesList adressesList={this.state.adress} />
             </TabPane>
             <TabPane tabId="2">
-              <Masonry options={{ fitWidth: true }} style={{ margin: "auto" }}>
+              <Row>
                 {this.state.candies.map((candy, index) => (
-                  <CandyCard key={index} {...candy} />
+                  <CandyCard key={index} {...candy} numero={index + 1} />
                 ))}
-              </Masonry>
+              </Row>
             </TabPane>
             <TabPane tabId="3">
               <Row>
