@@ -77,7 +77,7 @@ class App extends Component {
 
   fetchBonbonsApi() {
     for (let i = 1; i < 6; i++) {
-      fetch(`https://fr.openfoodfacts.org/categorie/bonbons-gelifies/${i}.json`)
+      fetch(`https://fr.openfoodfacts.org/categorie/bonbons/${i}.json`)
         .then(results => results.json()) // conversion du résultat en JSON
         .then(data => {
           this.setState({

@@ -8,7 +8,9 @@ import {
   Row,
   Col
 } from "reactstrap";
+import Masonry from "react-masonry-component";
 import classnames from "classnames";
+import CandyCard from "./CandyCard";
 import AdressesList from "./AdressesList";
 
 class Home extends Component {
@@ -33,7 +35,7 @@ class Home extends Component {
         <h1>Nom Projet</h1>
         <div style={{ display: "flex", justifyContent: "space-around" }}>
           <h2>Joueurs : {this.props.userName}</h2>
-          {/* <img csrc={this.props.userLogo} /> */}
+          {/* <img src={this.props.userLogo} /> */}
           <h2>Race : {this.props.userRace}</h2>
           <h2>Ville : {this.props.userCity}</h2>
         </div>
@@ -82,7 +84,13 @@ class Home extends Component {
           <TabPane tabId="1">
             <AdressesList adressesList={this.props.adressesList} />
           </TabPane>
-          <TabPane tabId="2">BonbonDex</TabPane>
+          <TabPane tabId="2">
+            <Masonry options={{ fitWidth: true }} style={{ margin: "auto" }}>
+              {this.props.candiesList.map(candy => (
+                <CandyCard {...candy} />
+              ))}
+            </Masonry>
+          </TabPane>
           <TabPane tabId="3">
             <Row>
               <Col sm="12">
