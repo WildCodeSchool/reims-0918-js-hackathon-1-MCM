@@ -2,7 +2,6 @@ import React, { Component } from "react";
 
 import Welcome from "./Welcome";
 
-
 import "./App.css";
 import Masonry from "react-masonry-component";
 import classnames from "classnames";
@@ -45,11 +44,12 @@ class App extends Component {
     this.handleChangeCity = this.handleChangeCity.bind(this);
   }
   handleChangeName(event) {
-    this.setState({ user:{...this.state.user,name:event.target.value}});
+    this.setState({ user: { ...this.state.user, name: event.target.value } });
   }
 
   handleChangeCity(event) {
-    this.setState({ user:{...this.state.user,city:event.target.value}})};
+    this.setState({ user: { ...this.state.user, city: event.target.value } });
+  }
   fetchCityCodeApi(cityName) {
     fetch(
       `https://geo.api.gouv.fr/communes?nom=${encodeURI(
@@ -142,7 +142,10 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-              <Welcome handleChangeName={this.handleChangeName} handleChangeCity={this.handleChangeCity} />
+        <Welcome
+          handleChangeName={this.handleChangeName}
+          handleChangeCity={this.handleChangeCity}
+        />
 
         <Button onClick={() => this.fetchAdressApi(this.state.user.citycode)}>
           Test
