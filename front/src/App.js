@@ -103,6 +103,9 @@ class App extends Component {
                 newCandy.name = candy.product_name_fr;
                 newCandy.image = candy.image_url;
                 newCandy.brands = candy.brands;
+                newCandy.finded = false;
+                newCandy.nbFinded = 0;
+                newCandy.whereFinded = "";
                 return newCandy;
               })
             ]
@@ -184,8 +187,8 @@ class App extends Component {
             </TabPane>
             <TabPane tabId="2">
               <Masonry options={{ fitWidth: true }} style={{ margin: "auto" }}>
-                {this.state.candies.map(candy => (
-                  <CandyCard {...candy} />
+                {this.state.candies.map((candy, index) => (
+                  <CandyCard key={index} {...candy} />
                 ))}
               </Masonry>
             </TabPane>
