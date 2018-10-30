@@ -29,6 +29,13 @@ class Home extends Component {
   render() {
     return (
       <div>
+        <h1>Nom Projet</h1>
+        <div style={{ display: "flex", justifyContent: "space-around" }}>
+          <h2>Joueurs : {this.props.userName}</h2>
+          {/* <img csrc={this.props.userLogo} /> */}
+          <h2>Race : {this.props.userRace}</h2>
+          <h2>Ville : {this.props.userCity}</h2>
+        </div>
         <Nav tabs className="justify-content-center">
           <NavItem>
             <NavLink
@@ -78,13 +85,7 @@ class Home extends Component {
               </Col>
             </Row>
           </TabPane>
-          <TabPane tabId="2">
-            <Row>
-              <Col sm="12">
-                <h4>BonbonsDex</h4>
-              </Col>
-            </Row>
-          </TabPane>
+          <TabPane tabId="2">BonbonDex</TabPane>
           <TabPane tabId="3">
             <Row>
               <Col sm="12">
