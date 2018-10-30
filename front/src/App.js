@@ -3,7 +3,6 @@ import React, { Component } from "react";
 import Welcome from "./Welcome";
 
 import "./App.css";
-import Masonry from "react-masonry-component";
 import classnames from "classnames";
 import CandyCard from "./CandyCard";
 import AdressesList from "./AdressesList";
@@ -20,6 +19,7 @@ import {
 } from "reactstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
+import ModalCandy from "./ModalCandy";
 
 class App extends Component {
   constructor() {
@@ -28,23 +28,28 @@ class App extends Component {
       adress: [],
       user: {
         name: "Belzebute",
-        city: "Reims",
+        city: "reims",
         logoRace:
           "https://banner2.kisspng.com/20180605/pe/kisspng-werewolf-the-apocalypse-gray-wolf-lycanthrope-5b174b545a6429.0270693815282532683703.jpg",
         race: "Werewolf",
         citycode: 0
       },
       candies: [],
-      activeTab: "1"
+      activeTab: "1",
+      selectedCandy: {},
+      modal: false
     };
     this.fetchAdressApi = this.fetchAdressApi.bind(this);
     this.toggle = this.toggle.bind(this);
 
     this.handleChangeName = this.handleChangeName.bind(this);
     this.handleChangeCity = this.handleChangeCity.bind(this);
+    this.closeModal = this.closeModal.bind(this);
+    this.handleCandyToModal = this.handleCandyToModal.bind(this);
   }
   handleChangeName(event) {
     this.setState({ user: { ...this.state.user, name: event.target.value } });
+    
   }
 
   handleChangeCity(event) {
@@ -85,13 +90,15 @@ class App extends Component {
           if (labelAdresse[0] >= 0 && labelAdresse[0] <= 9) {
             let isAdresses = 0;
             for (let i = 0; i < this.state.adress.length; i++) {
-              if (this.state.adress[i].includes(labelAdresse)) {
+              if (
+                this.state.adress[i].properties.label.includes(labelAdresse)
+              ) {
                 isAdresses++;
               }
             }
             if (!isAdresses) {
               this.setState({
-                adress: [...this.state.adress, labelAdresse]
+                adress: [...this.state.adress, data.features[selectRandom]]
               });
               adresseListLength--;
             }
@@ -132,6 +139,19 @@ class App extends Component {
         activeTab: tab
       });
     }
+  }
+
+  handleCandyToModal(candyInfos) {
+    this.setState({
+      selectedCandy: candyInfos,
+      modal: !this.state.modal
+    });
+  }
+
+  closeModal() {
+    this.setState({
+      modal: false
+    });
   }
 
   componentDidMount() {
@@ -203,11 +223,21 @@ class App extends Component {
               <AdressesList adressesList={this.state.adress} />
             </TabPane>
             <TabPane tabId="2">
-              <Masonry options={{ fitWidth: true }} style={{ margin: "auto" }}>
+              <Row>
                 {this.state.candies.map((candy, index) => (
-                  <CandyCard key={index} {...candy} />
+                  <CandyCard
+                    key={index}
+                    {...candy}
+                    numero={index + 1}
+                    candyToModal={this.handleCandyToModal}
+                  />
                 ))}
-              </Masonry>
+              </Row>
+              <ModalCandy
+                selectedCandy={this.state.selectedCandy}
+                modal={this.state.modal}
+                closeModal={this.closeModal}
+              />
             </TabPane>
             <TabPane tabId="3">
               <Row>
