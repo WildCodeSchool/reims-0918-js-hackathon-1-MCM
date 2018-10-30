@@ -18,6 +18,17 @@
   color: white;
 }
 
+.font {
+  font-family: 'Finger Paint', cursive;
+  font-size: 14px;
+  border-radius: 5px;
+  
+}
+
+.jumbotron {
+  background: none;
+}
+
 .App-link {
   color: #61dafb;
 }

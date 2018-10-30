@@ -1,4 +1,7 @@
 import React, { Component } from "react";
+
+import Welcome from "./Welcome";
+
 import "./App.css";
 import classnames from "classnames";
 import CandyCard from "./CandyCard";
@@ -38,10 +41,20 @@ class App extends Component {
     };
     this.fetchAdressApi = this.fetchAdressApi.bind(this);
     this.toggle = this.toggle.bind(this);
+
+    this.handleChangeName = this.handleChangeName.bind(this);
+    this.handleChangeCity = this.handleChangeCity.bind(this);
     this.closeModal = this.closeModal.bind(this);
     this.handleCandyToModal = this.handleCandyToModal.bind(this);
   }
+  handleChangeName(event) {
+    this.setState({ user: { ...this.state.user, name: event.target.value } });
+    
+  }
 
+  handleChangeCity(event) {
+    this.setState({ user: { ...this.state.user, city: event.target.value } });
+  }
   fetchCityCodeApi(cityName) {
     fetch(
       `https://geo.api.gouv.fr/communes?nom=${encodeURI(
@@ -149,6 +162,11 @@ class App extends Component {
   render() {
     return (
       <div className="App">
+        <Welcome
+          handleChangeName={this.handleChangeName}
+          handleChangeCity={this.handleChangeCity}
+        />
+
         <Button onClick={() => this.fetchAdressApi(this.state.user.citycode)}>
           Test
         </Button>
