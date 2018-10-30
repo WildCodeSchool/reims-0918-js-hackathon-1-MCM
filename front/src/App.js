@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import "./App.css";
-import Masonry from "react-masonry-component";
 import classnames from "classnames";
 import CandyCard from "./CandyCard";
 import AdressesList from "./AdressesList";
@@ -17,6 +16,7 @@ import {
 } from "reactstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
+import ModalCandy from "./ModalCandy";
 
 class App extends Component {
   constructor() {
@@ -32,10 +32,14 @@ class App extends Component {
         citycode: 0
       },
       candies: [],
-      activeTab: "1"
+      activeTab: "1",
+      selectedCandy: {},
+      modal: false
     };
     this.fetchAdressApi = this.fetchAdressApi.bind(this);
     this.toggle = this.toggle.bind(this);
+    this.closeModal = this.closeModal.bind(this);
+    this.handleCandyToModal = this.handleCandyToModal.bind(this);
   }
 
   fetchCityCodeApi(cityName) {
@@ -124,6 +128,19 @@ class App extends Component {
     }
   }
 
+  handleCandyToModal(candyInfos) {
+    this.setState({
+      selectedCandy: candyInfos,
+      modal: !this.state.modal
+    });
+  }
+
+  closeModal() {
+    this.setState({
+      modal: false
+    });
+  }
+
   componentDidMount() {
     this.fetchBonbonsApi();
     this.fetchCityCodeApi(this.state.user.city);
@@ -190,9 +207,19 @@ class App extends Component {
             <TabPane tabId="2">
               <Row>
                 {this.state.candies.map((candy, index) => (
-                  <CandyCard key={index} {...candy} numero={index + 1} />
+                  <CandyCard
+                    key={index}
+                    {...candy}
+                    numero={index + 1}
+                    candyToModal={this.handleCandyToModal}
+                  />
                 ))}
               </Row>
+              <ModalCandy
+                selectedCandy={this.state.selectedCandy}
+                modal={this.state.modal}
+                closeModal={this.closeModal}
+              />
             </TabPane>
             <TabPane tabId="3">
               <Row>
