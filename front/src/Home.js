@@ -9,6 +9,7 @@ import {
   Col
 } from "reactstrap";
 import classnames from "classnames";
+import AdressesList from "./AdressesList";
 
 class Home extends Component {
   constructor(props) {
@@ -47,7 +48,7 @@ class Home extends Component {
                 this.toggle("1");
               }}
             >
-              Adresses
+              Listes des Adresses
             </NavLink>
           </NavItem>
           <NavItem>
@@ -79,11 +80,7 @@ class Home extends Component {
         </Nav>
         <TabContent activeTab={this.state.activeTab}>
           <TabPane tabId="1">
-            <Row>
-              <Col sm="12">
-                <h4>Listes d'adresses</h4>
-              </Col>
-            </Row>
+            <AdressesList adressesList={this.props.adressesList} />
           </TabPane>
           <TabPane tabId="2">BonbonDex</TabPane>
           <TabPane tabId="3">
