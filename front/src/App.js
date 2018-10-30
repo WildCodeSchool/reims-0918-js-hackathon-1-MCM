@@ -1,7 +1,20 @@
 import React, { Component } from "react";
 import "./App.css";
-import Home from "./Home";
-import { Container, Button } from "reactstrap";
+import Masonry from "react-masonry-component";
+import classnames from "classnames";
+import CandyCard from "./CandyCard";
+import AdressesList from "./AdressesList";
+import {
+  Container,
+  Button,
+  TabContent,
+  TabPane,
+  Nav,
+  NavItem,
+  NavLink,
+  Row,
+  Col
+} from "reactstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 
@@ -18,9 +31,11 @@ class App extends Component {
         race: "Werewolf",
         citycode: 0
       },
-      candies: []
+      candies: [],
+      activeTab: "1"
     };
     this.fetchAdressApi = this.fetchAdressApi.bind(this);
+    this.toggle = this.toggle.bind(this);
   }
 
   fetchCityCodeApi(cityName) {
@@ -96,6 +111,14 @@ class App extends Component {
     }
   }
 
+  toggle(tab) {
+    if (this.state.activeTab !== tab) {
+      this.setState({
+        activeTab: tab
+      });
+    }
+  }
+
   componentDidMount() {
     this.fetchBonbonsApi();
     this.fetchCityCodeApi(this.state.user.city);
@@ -108,14 +131,72 @@ class App extends Component {
           Test
         </Button>
         <Container>
-          <Home
-            userName={this.state.user.name}
-            userCity={this.state.user.city}
-            userRace={this.state.user.race}
-            userLogo={this.state.user.logoRace}
-            candiesList={this.state.candies}
-            adressesList={this.state.adress}
-          />
+          <h1>Nom Projet</h1>
+          <div style={{ display: "flex", justifyContent: "space-around" }}>
+            <h2>Joueurs : {this.state.user.name}</h2>
+            <h2>Race : {this.state.user.race}</h2>
+            <h2>Ville : {this.state.user.city}</h2>
+          </div>
+          <Nav tabs className="justify-content-center">
+            <NavItem>
+              <NavLink
+                style={{ cursor: "pointer" }}
+                className={classnames("navlink", {
+                  active: this.state.activeTab === "1"
+                })}
+                onClick={() => {
+                  this.toggle("1");
+                }}
+              >
+                Listes des Adresses
+              </NavLink>
+            </NavItem>
+            <NavItem>
+              <NavLink
+                style={{ cursor: "pointer" }}
+                className={classnames("navlink", {
+                  active: this.state.activeTab === "1"
+                })}
+                onClick={() => {
+                  this.toggle("2");
+                }}
+              >
+                BonbonsDex
+              </NavLink>
+            </NavItem>
+            <NavItem>
+              <NavLink
+                style={{ cursor: "pointer" }}
+                className={classnames("navlink", {
+                  active: this.state.activeTab === "1"
+                })}
+                onClick={() => {
+                  this.toggle("3");
+                }}
+              >
+                Historique
+              </NavLink>
+            </NavItem>
+          </Nav>
+          <TabContent activeTab={this.state.activeTab}>
+            <TabPane tabId="1">
+              <AdressesList adressesList={this.state.adress} />
+            </TabPane>
+            <TabPane tabId="2">
+              <Masonry options={{ fitWidth: true }} style={{ margin: "auto" }}>
+                {this.state.candies.map(candy => (
+                  <CandyCard {...candy} />
+                ))}
+              </Masonry>
+            </TabPane>
+            <TabPane tabId="3">
+              <Row>
+                <Col sm="12">
+                  <h4>Historique de la quête bonbon</h4>
+                </Col>
+              </Row>
+            </TabPane>
+          </TabContent>
         </Container>
       </div>
     );
