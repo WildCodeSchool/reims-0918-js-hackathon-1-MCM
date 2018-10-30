@@ -7,6 +7,12 @@
   height: 40vmin;
 }
 
+.inputWelcome{
+  height: 30px;
+  width: 300px;
+  color:orangered;
+}
+
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
