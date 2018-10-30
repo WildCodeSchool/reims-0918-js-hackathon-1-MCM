@@ -1,26 +1,35 @@
 import React from "react";
-import { Card, CardBody, CardTitle, CardImg, CardText } from "reactstrap";
+import { Col } from "reactstrap";
 
 const CandyCard = props => {
   return (
-    <div>
-      <Card
-        style={{ width: "250px", height: "400px" }}
-        className="d-flex justify-content-center"
+    <Col xs="4" style={{ border: "1px solid black", marginBottom: "2px" }}>
+      <img
+        style={{
+          height: "100px",
+          width: "100px",
+          float: "right",
+          borderRadius: "50%"
+        }}
+        src={props.image}
+        alt="Candypics"
+      />
+      <p
+        style={{
+          float: "left",
+          fontWeight: "bold"
+        }}
       >
-        <CardImg
-          top
-          className="img-fluid"
-          style={{ height: "250px" }}
-          src={props.image}
-          alt="Candypics"
-        />
-        <CardBody>
-          <CardTitle>{props.name}</CardTitle>
-          <CardText className="mt-3">First Catch(launch the map)</CardText>
-        </CardBody>
-      </Card>
-    </div>
+        #{props.numero}
+      </p>
+      <p
+        style={{
+          float: "center"
+        }}
+      >
+        {props.name}
+      </p>
+    </Col>
   );
 };
 
