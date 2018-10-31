@@ -136,14 +136,16 @@ class AdressesList extends Component {
                 </Col>
               ))}
               {adressesVisited === 10 && (
-                <Button
-                  onClick={() => {
-                    clearStateAdress();
-                    fetchAdressApi();
-                  }}
-                >
-                  Afficher 10 nouvelles adresses
-                </Button>
+                <Col xs="12">
+                  <Button
+                    onClick={() => {
+                      clearStateAdress();
+                      fetchAdressApi();
+                    }}
+                  >
+                    Afficher 10 nouvelles adresses
+                  </Button>
+                </Col>
               )}
             </Fragment>
           )}
