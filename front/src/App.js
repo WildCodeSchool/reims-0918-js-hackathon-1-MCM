@@ -27,11 +27,11 @@ class App extends Component {
       adress: [],
       user: {
         name: "",
-        city: "",
+        city: "Reims",
         logoRace:
           "https://banner2.kisspng.com/20180605/pe/kisspng-werewolf-the-apocalypse-gray-wolf-lycanthrope-5b174b545a6429.0270693815282532683703.jpg",
         race: "Werewolf",
-        citycode: 0
+        citycode: 37261
       },
       candies: [],
       activeTab: "1",
@@ -181,7 +181,7 @@ class App extends Component {
   }
 
   handleChangeCity(event) {
-    this.fetchCityCodeApi(event.target.value);
+    this.fetchCityCodeApi(this.state.user.city);
     this.setState({ user: { ...this.state.user, city: event.target.value } });
   }
 
@@ -230,13 +230,14 @@ class App extends Component {
                   marginTop: "10px"
                 }}
               >
-                <Col className="my-auto" xs="3">
+                <Col className="my-auto" xs="12" sm="3">
                   <h1 style={{ fontWeight: "bold" }}>Wildalloween</h1>
                 </Col>
 
                 <Col
                   className="my-auto"
-                  xs="3"
+                  xs="12"
+                  sm="3"
                   style={{
                     borderRadius: "25%"
                   }}

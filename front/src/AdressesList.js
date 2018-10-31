@@ -50,7 +50,7 @@ class AdressesList extends Component {
         <Row className="pt-5">
           {this.state.selected ? (
             <Fragment>
-              <Col className="my-auto" xs={{ size: "3", offset: "1" }}>
+              <Col className="my-auto" xs="12" sm={{ size: "3", offset: "1" }}>
                 <img
                   className="img-fluid"
                   src={this.srcImg(
@@ -63,7 +63,7 @@ class AdressesList extends Component {
                   alt="google street view"
                 />
               </Col>
-              <Col className="my-auto" xs="7">
+              <Col className="my-auto" xs="12" sm="7">
                 <h3>
                   <u>Adresse visitée :</u>
                   <br /> {this.state.selectedHouse.properties.label}
@@ -102,7 +102,7 @@ class AdressesList extends Component {
               </Col>
               <Col xs="12">
                 <Button
-                  className="mb-2"
+                  className="mt-5 mb-2"
                   onClick={() => {
                     this.closeDetailHouse();
                     clearCandiesFind();

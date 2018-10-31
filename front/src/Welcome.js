@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Row, Col, Container } from "reactstrap";
+import { Row, Col, Container, Input } from "reactstrap";
 
 class Welcome extends Component {
   render() {
@@ -37,7 +37,6 @@ class Welcome extends Component {
             border: "solid 1px black",
             backgroundColor: "rgba(250,250,250,0.8)"
           }}
-          
         >
           Pour démarrer ta quête aux bonbons indique ton Prénom et ta Ville
         </h3>
@@ -52,7 +51,6 @@ class Welcome extends Component {
             xs="12"
             sm={{ size: "4", offset: "4" }}
           >
-          
             <label
               className="font mt-3"
               style={{ color: "#ff7700", fontSize: 20 }}
@@ -75,13 +73,26 @@ class Welcome extends Component {
               <span style={{ fontSize: 30 }}>Ville</span>
             </label>
             <br />
-            <input
-              id="city"
-              value={this.props.valeur}
-              placeholder="Entre ta ville !"
+            <Input
               onChange={this.props.handleChangeCity}
-              type="text"
-            />
+              type="select"
+              name="selectMulti"
+              id="exampleSelectMulti"
+            >
+              <option>Reims</option>
+              <option>Paris</option>
+              <option>Tours</option>
+              <option>Marseille</option>
+              <option>La Loupe</option>
+              <option>Strasbourg</option>
+              <option>Lille</option>
+              <option>Orléans</option>
+              <option>Bordeaux</option>
+              <option>Lyon</option>
+              <option>Toulouse</option>
+              <option>Biarritz</option>
+              <option>Nantes</option>
+            </Input>
             <br />
             <button
               className="font my-3"
