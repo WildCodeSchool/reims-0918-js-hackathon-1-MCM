@@ -18,6 +18,17 @@
   color: white;
 }
 
+.font {
+  font-family: "Acme", sans-serif;
+  font-size: 20px;
+  border-radius: 5px;
+}
+
+body {
+  background: url("images/bg.jpg") fixed;
+  background-size: cover;
+}
+
 .App-link {
   color: #61dafb;
 }
