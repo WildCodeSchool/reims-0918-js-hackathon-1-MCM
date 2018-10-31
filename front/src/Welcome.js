@@ -37,6 +37,7 @@ class Welcome extends Component {
             border: "solid 1px black",
             backgroundColor: "rgba(250,250,250,0.8)"
           }}
+          
         >
           Pour démarrer ta quête aux bonbons indique ton Nom et ta Ville
         </h3>
@@ -51,6 +52,7 @@ class Welcome extends Component {
             xs="12"
             sm={{ size: "4", offset: "4" }}
           >
+          
             <label
               className="font mt-3"
               style={{ color: "#ff7700", fontSize: 20 }}
