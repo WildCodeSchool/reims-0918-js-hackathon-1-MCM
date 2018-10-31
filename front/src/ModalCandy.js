@@ -1,11 +1,5 @@
 import React, { Component } from "react";
-import {
-  Modal,
-  ModalBody,
-  ModalHeader,
-  ModalFooter,
-  Container
-} from "reactstrap";
+import { Modal, ModalBody, ModalHeader, Container } from "reactstrap";
 
 class ModalCandy extends Component {
   render() {
