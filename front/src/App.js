@@ -27,8 +27,8 @@ class App extends Component {
     this.state = {
       adress: [],
       user: {
-        name: "Belzebute",
-        city: "reims",
+        name: "",
+        city: "",
         logoRace:
           "https://banner2.kisspng.com/20180605/pe/kisspng-werewolf-the-apocalypse-gray-wolf-lycanthrope-5b174b545a6429.0270693815282532683703.jpg",
         race: "Werewolf",
@@ -38,6 +38,7 @@ class App extends Component {
       activeTab: "1",
       selectedCandy: {},
       modal: false,
+      candiesFind: [],
       isHomeDisplayed: false
     };
     this.fetchAdressApi = this.fetchAdressApi.bind(this);
@@ -47,7 +48,10 @@ class App extends Component {
     this.handleChangeCity = this.handleChangeCity.bind(this);
     this.closeModal = this.closeModal.bind(this);
     this.handleCandyToModal = this.handleCandyToModal.bind(this);
+    this.checkDoor = this.checkDoor.bind(this);
+    this.clearCandiesFind = this.clearCandiesFind.bind(this);
     this.handleDisplayedHome = this.handleDisplayedHome.bind(this);
+    this.fetchAdressApi = this.fetchAdressApi.bind(this);
   }
 
   fetchCityCodeApi(cityName) {
@@ -64,7 +68,7 @@ class App extends Component {
       });
   }
 
-  fetchAdressApi(citycode, adresseListLength) {
+  fetchAdressApi(adresseListLength) {
     if (adresseListLength === 0) return;
     if (!adresseListLength) adresseListLength = 10;
 
@@ -73,7 +77,9 @@ class App extends Component {
     const streetRandom = street[Math.floor(Math.random() * Math.floor(3))];
 
     fetch(
-      `https://api-adresse.data.gouv.fr/search/?q=${numberRandom}+${streetRandom}&limit=10&citycode=${citycode}`
+      `https://api-adresse.data.gouv.fr/search/?q=${numberRandom}+${streetRandom}&limit=10&citycode=${
+        this.state.user.citycode
+      }`
     )
       .then(results => results.json()) // conversion du résultat en JSON
       .then(data => {
@@ -93,14 +99,17 @@ class App extends Component {
             }
             if (!isAdresses) {
               this.setState({
-                adress: [...this.state.adress, data.features[selectRandom]]
+                adress: [
+                  ...this.state.adress,
+                  { ...data.features[selectRandom], visited: false }
+                ]
               });
               adresseListLength--;
             }
           }
         }
 
-        this.fetchAdressApi(citycode, adresseListLength);
+        this.fetchAdressApi(adresseListLength);
       });
   }
 
@@ -139,7 +148,38 @@ class App extends Component {
     this.setState({ user: { ...this.state.user, name: event.target.value } });
   }
 
+  checkDoor(selectedHouse) {
+    const numberCandies = Math.floor(Math.random() * Math.floor(6));
+    const prevStateCandies = [...this.state.candies];
+    const candiesFind = [];
+    for (let i = 0; i < numberCandies; i++) {
+      const randomCandy = Math.floor(
+        Math.random() * Math.floor(this.state.candies.length)
+      );
+      prevStateCandies[randomCandy].whereFinded = prevStateCandies[randomCandy]
+        .whereFinded
+        ? prevStateCandies[randomCandy].whereFinded
+        : selectedHouse.properties.label;
+      prevStateCandies[randomCandy].nbFinded++;
+      prevStateCandies[randomCandy].finded = true;
+      candiesFind.push(prevStateCandies[randomCandy]);
+    }
+
+    let newAdresses = [...this.state.adress];
+    newAdresses[selectedHouse.index].visited = true;
+    this.setState({
+      adress: newAdresses,
+      candies: prevStateCandies,
+      candiesFind: candiesFind
+    });
+  }
+
+  clearCandiesFind() {
+    this.setState({ candiesFind: [] });
+  }
+
   handleChangeCity(event) {
+    this.fetchCityCodeApi(event.target.value);
     this.setState({ user: { ...this.state.user, city: event.target.value } });
   }
 
@@ -161,7 +201,6 @@ class App extends Component {
 
   componentDidMount() {
     this.fetchBonbonsApi();
-    this.fetchCityCodeApi(this.state.user.city);
   }
 
   render() {
@@ -169,12 +208,6 @@ class App extends Component {
       <div className="App">
         {this.state.isHomeDisplayed ? (
           <Container>
-            <Button
-              onClick={() => this.fetchAdressApi(this.state.user.citycode)}
-            >
-              Test
-            </Button>
-
             <h1>Nom Projet</h1>
             <div style={{ display: "flex", justifyContent: "space-around" }}>
               <h2>Joueurs : {this.state.user.name}</h2>
@@ -224,7 +257,12 @@ class App extends Component {
             </Nav>
             <TabContent activeTab={this.state.activeTab}>
               <TabPane tabId="1">
-                <AdressesList adressesList={this.state.adress} />
+                <AdressesList
+                  adressesList={this.state.adress}
+                  checkDoor={this.checkDoor}
+                  candiesFind={this.state.candiesFind}
+                  clearCandiesFind={this.clearCandiesFind}
+                />
               </TabPane>
               <TabPane tabId="2">
                 <Row>
@@ -257,6 +295,7 @@ class App extends Component {
             handleChangeName={this.handleChangeName}
             handleChangeCity={this.handleChangeCity}
             displayedHome={this.handleDisplayedHome}
+            fetchAdressApi={this.fetchAdressApi}
           />
         )}
       </div>

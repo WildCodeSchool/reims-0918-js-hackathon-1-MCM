@@ -3,6 +3,7 @@ import { Row, Col, Container } from "reactstrap";
 
 class Welcome extends Component {
   render() {
+    const fetchAdressApi = this.props.fetchAdressApi;
     return (
       <Container fluid style={{ height: "100vh" }}>
         <img
@@ -31,32 +32,34 @@ class Welcome extends Component {
           Pour démarrer ta quête aux bonbons indique ton Nom et ta Ville
         </h3>
         <Row>
-          <Col className="mt-5" style={{border: "solid 1px black", borderRadius: "10px", backgroundColor: "rgba(250,250,250,0.8)"}} xs="12" sm={{size: "6", offset: "3"}}>
+          <Col className="mt-5" style={{border: "solid 1px black", borderRadius: "10px", backgroundColor: "rgba(250,250,250,0.8)"}} xs="12" sm={{size: "4", offset: "4"}}>
             <label className="font mt-3" style={{ color: "#ff7700",fontSize:20}}>
             <span style={{fontSize:30}}>Prénom</span><br/>
+            </label>
               <input
-                className="font"
                 id="name"
                 value={this.props.valeur}
                 placeholder="Entre ton prénom !"
                 onChange={this.props.handleChangeName}
                 type="text"
-              />
-            </label><br/>
+              /><br/>
             <label className="font mt-3" style={{ color: "#ff7700",fontSize:20}}>
               <span style={{fontSize:30}}>Ville</span><br/>
+            </label>
               <input
                 id="city"
                 value={this.props.valeur}
                 placeholder="Entre ta ville !"
                 onChange={this.props.handleChangeCity}
                 type="text"
-              />
-            </label><br/>
+              /><br/>
             <button
               className="font my-3"
               style={{ color: "#ff7700"}}
-              onClick={() => this.props.displayedHome()}
+              onClick={() => {
+                this.props.displayedHome();
+                fetchAdressApi();
+              }}
             >
               Démarre ta chasse
             </button>
