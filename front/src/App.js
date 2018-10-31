@@ -27,8 +27,8 @@ class App extends Component {
     this.state = {
       adress: [],
       user: {
-        name: "Belzebute",
-        city: "reims",
+        name: "",
+        city: "",
         logoRace:
           "https://banner2.kisspng.com/20180605/pe/kisspng-werewolf-the-apocalypse-gray-wolf-lycanthrope-5b174b545a6429.0270693815282532683703.jpg",
         race: "Werewolf",
@@ -51,6 +51,7 @@ class App extends Component {
     this.checkDoor = this.checkDoor.bind(this);
     this.clearCandiesFind = this.clearCandiesFind.bind(this);
     this.handleDisplayedHome = this.handleDisplayedHome.bind(this);
+    this.fetchAdressApi = this.fetchAdressApi.bind(this);
   }
 
   fetchCityCodeApi(cityName) {
@@ -67,7 +68,7 @@ class App extends Component {
       });
   }
 
-  fetchAdressApi(citycode, adresseListLength) {
+  fetchAdressApi(adresseListLength) {
     if (adresseListLength === 0) return;
     if (!adresseListLength) adresseListLength = 10;
 
@@ -76,7 +77,9 @@ class App extends Component {
     const streetRandom = street[Math.floor(Math.random() * Math.floor(3))];
 
     fetch(
-      `https://api-adresse.data.gouv.fr/search/?q=${numberRandom}+${streetRandom}&limit=10&citycode=${citycode}`
+      `https://api-adresse.data.gouv.fr/search/?q=${numberRandom}+${streetRandom}&limit=10&citycode=${
+        this.state.user.citycode
+      }`
     )
       .then(results => results.json()) // conversion du résultat en JSON
       .then(data => {
@@ -106,7 +109,7 @@ class App extends Component {
           }
         }
 
-        this.fetchAdressApi(citycode, adresseListLength);
+        this.fetchAdressApi(adresseListLength);
       });
   }
 
@@ -176,6 +179,7 @@ class App extends Component {
   }
 
   handleChangeCity(event) {
+    this.fetchCityCodeApi(event.target.value);
     this.setState({ user: { ...this.state.user, city: event.target.value } });
   }
 
@@ -197,7 +201,6 @@ class App extends Component {
 
   componentDidMount() {
     this.fetchBonbonsApi();
-    this.fetchCityCodeApi(this.state.user.city);
   }
 
   render() {
@@ -205,12 +208,6 @@ class App extends Component {
       <div className="App">
         {this.state.isHomeDisplayed ? (
           <Container>
-            <Button
-              onClick={() => this.fetchAdressApi(this.state.user.citycode)}
-            >
-              Test
-            </Button>
-
             <h1>Nom Projet</h1>
             <div style={{ display: "flex", justifyContent: "space-around" }}>
               <h2>Joueurs : {this.state.user.name}</h2>
@@ -298,6 +295,7 @@ class App extends Component {
             handleChangeName={this.handleChangeName}
             handleChangeCity={this.handleChangeCity}
             displayedHome={this.handleDisplayedHome}
+            fetchAdressApi={this.fetchAdressApi}
           />
         )}
       </div>

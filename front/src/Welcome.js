@@ -3,6 +3,7 @@ import { Row, Col, Container } from "reactstrap";
 
 class Welcome extends Component {
   render() {
+    const fetchAdressApi = this.props.fetchAdressApi;
     return (
       <Container fluid style={{ backgroundColor: "#000000", height: "100vh" }}>
         <img
@@ -38,12 +39,12 @@ class Welcome extends Component {
           style={{ height: "280px" }}
         />
         <p className="font" style={{ color: "#ff7700" }}>
-          Pour démarrer ta quête aux bonbons indique ton Nom et ta Ville
+          Pour démarrer ta quête aux bonbons indique ton Prénom et ta Ville
         </p>
         <Row>
           <Col xs="6">
             <label className="font" style={{ color: "#ff7700", width: "100%" }}>
-              Nom :
+              Prénom :
               <input
                 className="font"
                 id="name"
@@ -73,7 +74,10 @@ class Welcome extends Component {
             <button
               className="font"
               style={{ color: "#ff7700" }}
-              onClick={() => this.props.displayedHome()}
+              onClick={() => {
+                this.props.displayedHome();
+                fetchAdressApi();
+              }}
             >
               Démarre ta chasse
             </button>

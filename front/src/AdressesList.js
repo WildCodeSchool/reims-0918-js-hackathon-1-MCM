@@ -64,7 +64,7 @@ class AdressesList extends Component {
                   <u>Adresse visitée :</u>
                   <br /> {this.state.selectedHouse.properties.label}
                 </h3>
-                {candiesFind.length > 1 ? (
+                {candiesFind.length > 0 ? (
                   <Row>
                     <Col xs="12">
                       <p>Bonbons récupérés :</p>
