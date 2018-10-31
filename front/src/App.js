@@ -223,14 +223,42 @@ class App extends Component {
                 paddingBottom: "20px"
               }}
             >
-              <Row style={{ display: "flex", justifyContent: "space-around" }}>
+              <Row
+                style={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  marginTop: "10px"
+                }}
+              >
                 <Col className="my-auto" xs="3">
-                  <h1>Halloween</h1>
+                  <h1 style={{ fontWeight: "bold" }}>Wildalloween</h1>
                 </Col>
 
-                <Col className="my-auto" xs="3">
-                  <h2>Joueurs : {this.state.user.name}</h2>
-                  <h2>Ville : {this.state.user.city}</h2>
+                <Col
+                  className="my-auto"
+                  xs="3"
+                  style={{
+                    borderRadius: "25%"
+                  }}
+                >
+                  <h2
+                    style={{
+                      backgroundColor: "rgba(250,250,250,0.6)",
+                      color: "black"
+                    }}
+                  >
+                    <span style={{ fontWeight: "bold" }}>Joueurs :</span>{" "}
+                    {this.state.user.name}
+                  </h2>
+                  <h2
+                    style={{
+                      backgroundColor: "rgba(250,250,250,0.6)",
+                      color: "black"
+                    }}
+                  >
+                    <span style={{ fontWeight: "bold" }}>Ville</span> :{" "}
+                    {this.state.user.city}
+                  </h2>
                 </Col>
               </Row>
             </header>
@@ -244,7 +272,7 @@ class App extends Component {
                   style={{
                     cursor: "pointer",
                     color: "purple",
-                    backgroundColor: "rgba(250,250,250,0.9)",
+                    backgroundColor: "rgba(250,250,250,0.7)",
                     fontSize: "20px"
                   }}
                   className={classnames("navlink", {
@@ -276,15 +304,15 @@ class App extends Component {
                 </NavLink>
               </NavItem>
             </Nav>
-            <TabContent
-              activeTab={this.state.activeTab}
-              style={{
-                border: "solid 1px black",
-                borderRadius: "10px",
-                backgroundColor: "rgba(250,250,250,0.8)"
-              }}
-            >
-              <TabPane tabId="1">
+            <TabContent activeTab={this.state.activeTab}>
+              <TabPane
+                tabId="1"
+                style={{
+                  border: "solid 1px black",
+                  borderRadius: "10px",
+                  backgroundColor: "rgba(250,250,250,0.8)"
+                }}
+              >
                 <AdressesList
                   adressesVisited={this.state.adressVisited}
                   adressesList={this.state.adress}
