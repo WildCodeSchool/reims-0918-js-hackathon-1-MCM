@@ -66,7 +66,7 @@ class AdressesList extends Component {
               <Col className="my-auto" xs="12" sm="7">
                 <h3>
                   <u>Adresse visitée :</u>
-                  <br /> {this.state.selectedHouse.properties.label}
+                  <br /> {this.state.selectedHouse.properties.name}
                 </h3>
                 {candiesFind.length > 0 ? (
                   <Row>
