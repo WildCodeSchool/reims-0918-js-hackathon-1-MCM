@@ -1,4 +1,7 @@
 import React, { Component } from "react";
+
+import Welcome from "./Welcome";
+
 import "./App.css";
 import classnames from "classnames";
 import CandyCard from "./CandyCard";
@@ -35,14 +38,19 @@ class App extends Component {
       activeTab: "1",
       selectedCandy: {},
       modal: false,
-      candiesFind: []
+      candiesFind: [],
+      isHomeDisplayed: false
     };
     this.fetchAdressApi = this.fetchAdressApi.bind(this);
     this.toggle = this.toggle.bind(this);
+
+    this.handleChangeName = this.handleChangeName.bind(this);
+    this.handleChangeCity = this.handleChangeCity.bind(this);
     this.closeModal = this.closeModal.bind(this);
     this.handleCandyToModal = this.handleCandyToModal.bind(this);
     this.checkDoor = this.checkDoor.bind(this);
     this.clearCandiesFind = this.clearCandiesFind.bind(this);
+    this.handleDisplayedHome = this.handleDisplayedHome.bind(this);
   }
 
   fetchCityCodeApi(cityName) {
@@ -133,6 +141,9 @@ class App extends Component {
       });
     }
   }
+  handleChangeName(event) {
+    this.setState({ user: { ...this.state.user, name: event.target.value } });
+  }
 
   checkDoor(selectedHouse) {
     const numberCandies = Math.floor(Math.random() * Math.floor(6));
@@ -164,6 +175,13 @@ class App extends Component {
     this.setState({ candiesFind: [] });
   }
 
+  handleChangeCity(event) {
+    this.setState({ user: { ...this.state.user, city: event.target.value } });
+  }
+
+  handleDisplayedHome() {
+    this.setState({ isHomeDisplayed: true });
+  }
   handleCandyToModal(candyInfos) {
     this.setState({
       selectedCandy: candyInfos,
@@ -185,92 +203,103 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <Button onClick={() => this.fetchAdressApi(this.state.user.citycode)}>
-          Test
-        </Button>
-        <Container>
-          <h1>Nom Projet</h1>
-          <div style={{ display: "flex", justifyContent: "space-around" }}>
-            <h2>Joueurs : {this.state.user.name}</h2>
-            <h2>Race : {this.state.user.race}</h2>
-            <h2>Ville : {this.state.user.city}</h2>
-          </div>
-          <Nav tabs className="justify-content-center">
-            <NavItem>
-              <NavLink
-                style={{ cursor: "pointer" }}
-                className={classnames("navlink", {
-                  active: this.state.activeTab === "1"
-                })}
-                onClick={() => {
-                  this.toggle("1");
-                }}
-              >
-                Listes des Adresses
-              </NavLink>
-            </NavItem>
-            <NavItem>
-              <NavLink
-                style={{ cursor: "pointer" }}
-                className={classnames("navlink", {
-                  active: this.state.activeTab === "1"
-                })}
-                onClick={() => {
-                  this.toggle("2");
-                }}
-              >
-                BonbonsDex
-              </NavLink>
-            </NavItem>
-            <NavItem>
-              <NavLink
-                style={{ cursor: "pointer" }}
-                className={classnames("navlink", {
-                  active: this.state.activeTab === "1"
-                })}
-                onClick={() => {
-                  this.toggle("3");
-                }}
-              >
-                Historique
-              </NavLink>
-            </NavItem>
-          </Nav>
-          <TabContent activeTab={this.state.activeTab}>
-            <TabPane tabId="1">
-              <AdressesList
-                adressesList={this.state.adress}
-                checkDoor={this.checkDoor}
-                candiesFind={this.state.candiesFind}
-                clearCandiesFind={this.clearCandiesFind}
-              />
-            </TabPane>
-            <TabPane tabId="2">
-              <Row>
-                {this.state.candies.map((candy, index) => (
-                  <CandyCard
-                    key={index}
-                    {...candy}
-                    numero={index + 1}
-                    candyToModal={this.handleCandyToModal}
-                  />
-                ))}
-              </Row>
-              <ModalCandy
-                selectedCandy={this.state.selectedCandy}
-                modal={this.state.modal}
-                closeModal={this.closeModal}
-              />
-            </TabPane>
-            <TabPane tabId="3">
-              <Row>
-                <Col sm="12">
-                  <h4>Historique de la quête bonbon</h4>
-                </Col>
-              </Row>
-            </TabPane>
-          </TabContent>
-        </Container>
+        {this.state.isHomeDisplayed ? (
+          <Container>
+            <Button
+              onClick={() => this.fetchAdressApi(this.state.user.citycode)}
+            >
+              Test
+            </Button>
+
+            <h1>Nom Projet</h1>
+            <div style={{ display: "flex", justifyContent: "space-around" }}>
+              <h2>Joueurs : {this.state.user.name}</h2>
+              <h2>Race : {this.state.user.race}</h2>
+              <h2>Ville : {this.state.user.city}</h2>
+            </div>
+            <Nav tabs className="justify-content-center">
+              <NavItem>
+                <NavLink
+                  style={{ cursor: "pointer" }}
+                  className={classnames("navlink", {
+                    active: this.state.activeTab === "1"
+                  })}
+                  onClick={() => {
+                    this.toggle("1");
+                  }}
+                >
+                  Listes des Adresses
+                </NavLink>
+              </NavItem>
+              <NavItem>
+                <NavLink
+                  style={{ cursor: "pointer" }}
+                  className={classnames("navlink", {
+                    active: this.state.activeTab === "1"
+                  })}
+                  onClick={() => {
+                    this.toggle("2");
+                  }}
+                >
+                  BonbonsDex
+                </NavLink>
+              </NavItem>
+              <NavItem>
+                <NavLink
+                  style={{ cursor: "pointer" }}
+                  className={classnames("navlink", {
+                    active: this.state.activeTab === "1"
+                  })}
+                  onClick={() => {
+                    this.toggle("3");
+                  }}
+                >
+                  Historique
+                </NavLink>
+              </NavItem>
+            </Nav>
+            <TabContent activeTab={this.state.activeTab}>
+              <TabPane tabId="1">
+                <AdressesList
+                  adressesList={this.state.adress}
+                  checkDoor={this.checkDoor}
+                  candiesFind={this.state.candiesFind}
+                  clearCandiesFind={this.clearCandiesFind}
+                />
+              </TabPane>
+              <TabPane tabId="2">
+                <Row>
+                  {this.state.candies.map((candy, index) => (
+                    <CandyCard
+                      key={index}
+                      {...candy}
+                      numero={index + 1}
+                      candyToModal={this.handleCandyToModal}
+                    />
+                  ))}
+                </Row>
+                <ModalCandy
+                  selectedCandy={this.state.selectedCandy}
+                  modal={this.state.modal}
+                  closeModal={this.closeModal}
+                />
+              </TabPane>
+              <TabPane tabId="3">
+                <Row>
+                  <Col sm="12">
+                    <h4>Historique de la quête bonbon</h4>
+                  </Col>
+                </Row>
+              </TabPane>
+            </TabContent>
+          </Container>
+        ) : (
+          <Welcome
+            handleChangeName={this.handleChangeName}
+            handleChangeCity={this.handleChangeCity}
+            displayedHome={this.handleDisplayedHome}
+          />
+        )}
       </div>
     );
   }

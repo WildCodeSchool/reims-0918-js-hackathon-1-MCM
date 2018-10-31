@@ -46,7 +46,7 @@ class AdressesList extends Component {
         <Row className="pt-5">
           {this.state.selected ? (
             <Fragment>
-              <Col xs={{ size: "3", offset: "1" }}>
+              <Col className="my-auto" xs={{ size: "3", offset: "1" }}>
                 <img
                   className="img-fluid"
                   src={this.srcImg(
@@ -59,14 +59,37 @@ class AdressesList extends Component {
                   alt="google street view"
                 />
               </Col>
-              <Col xs="7">
-                <p>{this.state.selectedHouse.properties.label}</p>
+              <Col className="my-auto" xs="7">
+                <h3>
+                  <u>Adresse visitée :</u>
+                  <br /> {this.state.selectedHouse.properties.label}
+                </h3>
                 {candiesFind.length > 1 ? (
-                  <Fragment>
+                  <Row>
+                    <Col xs="12">
+                      <p>Bonbons récupérés :</p>
+                    </Col>
                     {candiesFind.map((candy, index) => (
-                      <p key={index}>{candy.name}</p>
+                      <Col className="mb-2" key={index} xs="12" sm="6">
+                        <Row>
+                          <Col className="my-auto" xs="8">
+                            {candy.name}
+                          </Col>
+                          <Col xs="4">
+                            <img
+                              style={{
+                                height: "75px",
+                                width: "75px"
+                              }}
+                              className="img-fluid rounded-circle"
+                              src={candy.image}
+                              alt={candy.name}
+                            />
+                          </Col>
+                        </Row>
+                      </Col>
                     ))}
-                  </Fragment>
+                  </Row>
                 ) : (
                   <Button onClick={() => checkDoor(this.state.selectedHouse)}>
                     Sonner à la porte
