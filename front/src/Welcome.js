@@ -32,7 +32,9 @@ class Welcome extends Component {
           src="https://media.giphy.com/media/qUHxAava8vmUg/giphy.gif"
           style={{ height: "80px" }}
         />
-        <p className="font" style={{ color: "#ff7700" }}>
+       
+      
+        <p className="font mt-5" style={{ color: "#ff7700" }}>
           Pour démarrer ta quête aux bonbons indique ton Nom et ta Ville
         </p>
 
