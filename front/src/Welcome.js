@@ -39,7 +39,7 @@ class Welcome extends Component {
           }}
           
         >
-          Pour démarrer ta quête aux bonbons indique ton Nom et ta Ville
+          Pour démarrer ta quête aux bonbons indique ton Prénom et ta Ville
         </h3>
         <Row>
           <Col
