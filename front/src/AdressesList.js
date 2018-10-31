@@ -147,6 +147,17 @@ class AdressesList extends Component {
             </Fragment>
           )}
         </Row>
+        <img
+          src="http://petitemimine.p.e.pic.centerblog.net/2fc180e7.gif"
+          alt="sorciére"
+          style={{
+            width: "150px",
+            height: "150px",
+            marginTop: "0px",
+            right: "50px",
+            top: "20px"
+          }}
+        />
       </div>
     );
   }
