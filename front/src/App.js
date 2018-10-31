@@ -231,7 +231,7 @@ class App extends Component {
                 }}
               >
                 <Col className="my-auto" xs="12" sm="3">
-                  <h1 style={{ fontWeight: "bold" }}>Wildalloween</h1>
+                  <h1 style={{ fontWeight: "bold" }}>Wild'Halloween</h1>
                 </Col>
 
                 <Col
