@@ -38,6 +38,7 @@ class App extends Component {
       activeTab: "1",
       selectedCandy: {},
       modal: false,
+      candiesFind: [],
       isHomeDisplayed: false
     };
     this.fetchAdressApi = this.fetchAdressApi.bind(this);
@@ -47,6 +48,8 @@ class App extends Component {
     this.handleChangeCity = this.handleChangeCity.bind(this);
     this.closeModal = this.closeModal.bind(this);
     this.handleCandyToModal = this.handleCandyToModal.bind(this);
+    this.checkDoor = this.checkDoor.bind(this);
+    this.clearCandiesFind = this.clearCandiesFind.bind(this);
     this.handleDisplayedHome = this.handleDisplayedHome.bind(this);
   }
 
@@ -93,7 +96,10 @@ class App extends Component {
             }
             if (!isAdresses) {
               this.setState({
-                adress: [...this.state.adress, data.features[selectRandom]]
+                adress: [
+                  ...this.state.adress,
+                  { ...data.features[selectRandom], visited: false }
+                ]
               });
               adresseListLength--;
             }
@@ -137,6 +143,36 @@ class App extends Component {
   }
   handleChangeName(event) {
     this.setState({ user: { ...this.state.user, name: event.target.value } });
+  }
+
+  checkDoor(selectedHouse) {
+    const numberCandies = Math.floor(Math.random() * Math.floor(6));
+    const prevStateCandies = [...this.state.candies];
+    const candiesFind = [];
+    for (let i = 0; i < numberCandies; i++) {
+      const randomCandy = Math.floor(
+        Math.random() * Math.floor(this.state.candies.length)
+      );
+      prevStateCandies[randomCandy].whereFinded = prevStateCandies[randomCandy]
+        .whereFinded
+        ? prevStateCandies[randomCandy].whereFinded
+        : selectedHouse.properties.label;
+      prevStateCandies[randomCandy].nbFinded++;
+      prevStateCandies[randomCandy].finded = true;
+      candiesFind.push(prevStateCandies[randomCandy]);
+    }
+
+    let newAdresses = [...this.state.adress];
+    newAdresses[selectedHouse.index].visited = true;
+    this.setState({
+      adress: newAdresses,
+      candies: prevStateCandies,
+      candiesFind: candiesFind
+    });
+  }
+
+  clearCandiesFind() {
+    this.setState({ candiesFind: [] });
   }
 
   handleChangeCity(event) {
@@ -224,7 +260,12 @@ class App extends Component {
             </Nav>
             <TabContent activeTab={this.state.activeTab}>
               <TabPane tabId="1">
-                <AdressesList adressesList={this.state.adress} />
+                <AdressesList
+                  adressesList={this.state.adress}
+                  checkDoor={this.checkDoor}
+                  candiesFind={this.state.candiesFind}
+                  clearCandiesFind={this.clearCandiesFind}
+                />
               </TabPane>
               <TabPane tabId="2">
                 <Row>

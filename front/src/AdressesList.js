@@ -15,8 +15,11 @@ class AdressesList extends Component {
     this.setState({ selected: false });
   }
 
-  changeHouse(house) {
-    this.setState({ selected: true, selectedHouse: house });
+  changeHouse(house, index) {
+    this.setState({
+      selected: true,
+      selectedHouse: { ...house, index: index }
+    });
   }
 
   srcImg(urlGoogle) {
@@ -32,14 +35,18 @@ class AdressesList extends Component {
   }
 
   render() {
-    const adressesList = this.props.adressesList;
+    const {
+      adressesList,
+      checkDoor,
+      candiesFind,
+      clearCandiesFind
+    } = this.props;
     return (
       <div>
         <Row className="pt-5">
           {this.state.selected ? (
             <Fragment>
-              <Col xs={{ size: "3", offset: "1" }}>
-                {/* <img className="img-fluid" src={door} alt="door" /> */}
+              <Col className="my-auto" xs={{ size: "3", offset: "1" }}>
                 <img
                   className="img-fluid"
                   src={this.srcImg(
@@ -52,11 +59,50 @@ class AdressesList extends Component {
                   alt="google street view"
                 />
               </Col>
-              <Col xs="7">
-                <p>{this.state.selectedHouse.properties.label}</p>
+              <Col className="my-auto" xs="7">
+                <h3>
+                  <u>Adresse visitée :</u>
+                  <br /> {this.state.selectedHouse.properties.label}
+                </h3>
+                {candiesFind.length > 1 ? (
+                  <Row>
+                    <Col xs="12">
+                      <p>Bonbons récupérés :</p>
+                    </Col>
+                    {candiesFind.map((candy, index) => (
+                      <Col className="mb-2" key={index} xs="12" sm="6">
+                        <Row>
+                          <Col className="my-auto" xs="8">
+                            {candy.name}
+                          </Col>
+                          <Col xs="4">
+                            <img
+                              style={{
+                                height: "75px",
+                                width: "75px"
+                              }}
+                              className="img-fluid rounded-circle"
+                              src={candy.image}
+                              alt={candy.name}
+                            />
+                          </Col>
+                        </Row>
+                      </Col>
+                    ))}
+                  </Row>
+                ) : (
+                  <Button onClick={() => checkDoor(this.state.selectedHouse)}>
+                    Sonner à la porte
+                  </Button>
+                )}
               </Col>
               <Col xs="12">
-                <Button onClick={() => this.closeDetailHouse()}>
+                <Button
+                  onClick={() => {
+                    this.closeDetailHouse();
+                    clearCandiesFind();
+                  }}
+                >
                   Retourner à la liste des maisons
                 </Button>
               </Col>
@@ -68,9 +114,18 @@ class AdressesList extends Component {
               </Col>
               {adressesList.map((adresse, index) => (
                 <Col className="text-left" xs="6" key={index}>
-                  <p onClick={() => this.changeHouse(adresse)}>
-                    - {adresse.properties.label}
-                  </p>
+                  {adresse.visited ? (
+                    <p className="text-secondary">
+                      - {adresse.properties.label}
+                    </p>
+                  ) : (
+                    <p
+                      style={{ cursor: "pointer" }}
+                      onClick={() => this.changeHouse(adresse, index)}
+                    >
+                      - {adresse.properties.label}
+                    </p>
+                  )}
                 </Col>
               ))}
             </Fragment>
