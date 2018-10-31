@@ -5,7 +5,7 @@ class Welcome extends Component {
   render() {
     const fetchAdressApi = this.props.fetchAdressApi;
     return (
-      <Container fluid style={{ backgroundColor: "#000000", height: "100vh" }}>
+      <Container fluid style={{ height: "100vh" }}>
         <img
           src="http://luida.l.u.pic.centerblog.net/gitoi.gif"
           alt="araignée"
@@ -22,57 +22,67 @@ class Welcome extends Component {
           style={{
             width: "150px",
             height: "150px",
-            position: "absolute",
+            marginTop: "0px",
             right: "50px",
             top: "20px"
           }}
         />
-        <img
-          src="http://fantazia.f.a.pic.centerblog.net/myspac10.gif"
-          alt="titre"
-          style={{ width: "500px", height: "250px" }}
-        />
-        <br />
-        <img
-          src="https://media.giphy.com/media/qUHxAava8vmUg/giphy.gif"
-          alt="tete"
-          style={{ height: "280px" }}
-        />
-        <p className="font" style={{ color: "#ff7700" }}>
-          Pour démarrer ta quête aux bonbons indique ton Prénom et ta Ville
 
-        </p>
+        <h3
+          className="font  mb-4"
+          style={{
+            color: "#ff7700",
+            marginTop: "100px",
+            fontSize: 40,
+            border: "solid 1px black",
+            backgroundColor: "rgba(250,250,250,0.8)"
+          }}
+        >
+          Pour démarrer ta quête aux bonbons indique ton Nom et ta Ville
+        </h3>
         <Row>
-          <Col xs="6">
-            <label className="font" style={{ color: "#ff7700", width: "100%" }}>
-              Prénom :
-              <input
-                className="font"
-                id="name"
-                value={this.props.valeur}
-                placeholder="Entre ton prénom !"
-                onChange={this.props.handleChangeName}
-                type="text"
-              />
+          <Col
+            className="mt-5"
+            style={{
+              border: "solid 1px black",
+              borderRadius: "10px",
+              backgroundColor: "rgba(250,250,250,0.8)"
+            }}
+            xs="12"
+            sm={{ size: "4", offset: "4" }}
+          >
+            <label
+              className="font mt-3"
+              style={{ color: "#ff7700", fontSize: 20 }}
+            >
+              <span style={{ fontSize: 30 }}>Prénom</span>
             </label>
-          </Col>
-
-          <Col xs="6">
-            <label className="font" style={{ color: "#ff7700" }}>
-              Ville :
-              <input
-                id="city"
-                value={this.props.valeur}
-                placeholder="Entre ta ville !"
-                onChange={this.props.handleChangeCity}
-                type="text"
-              />
+            <br />
+            <input
+              id="name"
+              value={this.props.valeur}
+              placeholder="Entre ton prénom !"
+              onChange={this.props.handleChangeName}
+              type="text"
+            />
+            <br />
+            <label
+              className="font mt-3"
+              style={{ color: "#ff7700", fontSize: 20 }}
+            >
+              <span style={{ fontSize: 30 }}>Ville</span>
             </label>
-          </Col>
-
-          <Col>
+            <br />
+            <input
+              id="city"
+              value={this.props.valeur}
+              placeholder="Entre ta ville !"
+              onChange={this.props.handleChangeCity}
+              type="text"
+            />
+            <br />
             <button
-              className="font mt-5"
+              className="font my-3"
               style={{ color: "#ff7700" }}
               onClick={() => {
                 this.props.displayedHome();

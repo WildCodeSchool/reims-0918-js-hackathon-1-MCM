@@ -36,10 +36,14 @@ class AdressesList extends Component {
 
   render() {
     const {
+      adressesVisited,
       adressesList,
       checkDoor,
       candiesFind,
-      clearCandiesFind
+      clearCandiesFind,
+      fetchAdressApi,
+      clearStateAdress,
+      cityUser
     } = this.props;
     return (
       <div>
@@ -110,24 +114,32 @@ class AdressesList extends Component {
           ) : (
             <Fragment>
               <Col xs="12">
-                <h2>Liste des maisons à visiter :</h2>
+                <h2>Liste des maisons à visiter à {cityUser} :</h2>
               </Col>
               {adressesList.map((adresse, index) => (
-                <Col className="text-left" xs="6" key={index}>
+                <Col className="text-center" xs="6" key={index}>
                   {adresse.visited ? (
-                    <p className="text-secondary">
-                      - {adresse.properties.label}
-                    </p>
+                    <p className="text-secondary">{adresse.properties.name}</p>
                   ) : (
                     <p
                       style={{ cursor: "pointer" }}
                       onClick={() => this.changeHouse(adresse, index)}
                     >
-                      - {adresse.properties.label}
+                      {adresse.properties.name}
                     </p>
                   )}
                 </Col>
               ))}
+              {adressesVisited === 10 && (
+                <Button
+                  onClick={() => {
+                    clearStateAdress();
+                    fetchAdressApi();
+                  }}
+                >
+                  Afficher 10 nouvelles adresses
+                </Button>
+              )}
             </Fragment>
           )}
         </Row>

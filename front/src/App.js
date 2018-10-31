@@ -8,7 +8,6 @@ import CandyCard from "./CandyCard";
 import AdressesList from "./AdressesList";
 import {
   Container,
-  Button,
   TabContent,
   TabPane,
   Nav,
@@ -39,7 +38,8 @@ class App extends Component {
       selectedCandy: {},
       modal: false,
       candiesFind: [],
-      isHomeDisplayed: false
+      isHomeDisplayed: false,
+      adressVisited: 0
     };
     this.fetchAdressApi = this.fetchAdressApi.bind(this);
     this.toggle = this.toggle.bind(this);
@@ -52,6 +52,7 @@ class App extends Component {
     this.clearCandiesFind = this.clearCandiesFind.bind(this);
     this.handleDisplayedHome = this.handleDisplayedHome.bind(this);
     this.fetchAdressApi = this.fetchAdressApi.bind(this);
+    this.clearStateAdress = this.clearStateAdress.bind(this);
   }
 
   fetchCityCodeApi(cityName) {
@@ -149,7 +150,7 @@ class App extends Component {
   }
 
   checkDoor(selectedHouse) {
-    const numberCandies = Math.floor(Math.random() * Math.floor(6));
+    const numberCandies = Math.ceil(Math.random() * Math.floor(6));
     const prevStateCandies = [...this.state.candies];
     const candiesFind = [];
     for (let i = 0; i < numberCandies; i++) {
@@ -164,13 +165,14 @@ class App extends Component {
       prevStateCandies[randomCandy].finded = true;
       candiesFind.push(prevStateCandies[randomCandy]);
     }
-
+    const newAdressVisited = this.state.adressVisited + 1;
     let newAdresses = [...this.state.adress];
     newAdresses[selectedHouse.index].visited = true;
     this.setState({
       adress: newAdresses,
       candies: prevStateCandies,
-      candiesFind: candiesFind
+      candiesFind: candiesFind,
+      adressVisited: newAdressVisited
     });
   }
 
@@ -196,6 +198,13 @@ class App extends Component {
   closeModal() {
     this.setState({
       modal: false
+    });
+  }
+
+  clearStateAdress() {
+    this.setState({
+      adress: [],
+      adressVisited: 0
     });
   }
 
@@ -241,27 +250,18 @@ class App extends Component {
                   BonbonsDex
                 </NavLink>
               </NavItem>
-              <NavItem>
-                <NavLink
-                  style={{ cursor: "pointer" }}
-                  className={classnames("navlink", {
-                    active: this.state.activeTab === "1"
-                  })}
-                  onClick={() => {
-                    this.toggle("3");
-                  }}
-                >
-                  Historique
-                </NavLink>
-              </NavItem>
             </Nav>
             <TabContent activeTab={this.state.activeTab}>
               <TabPane tabId="1">
                 <AdressesList
+                  adressesVisited={this.state.adressVisited}
                   adressesList={this.state.adress}
                   checkDoor={this.checkDoor}
                   candiesFind={this.state.candiesFind}
                   clearCandiesFind={this.clearCandiesFind}
+                  fetchAdressApi={this.fetchAdressApi}
+                  clearStateAdress={this.clearStateAdress}
+                  cityUser={this.state.user.city}
                 />
               </TabPane>
               <TabPane tabId="2">
@@ -280,13 +280,6 @@ class App extends Component {
                   modal={this.state.modal}
                   closeModal={this.closeModal}
                 />
-              </TabPane>
-              <TabPane tabId="3">
-                <Row>
-                  <Col sm="12">
-                    <h4>Historique de la quête bonbon</h4>
-                  </Col>
-                </Row>
               </TabPane>
             </TabContent>
           </Container>
