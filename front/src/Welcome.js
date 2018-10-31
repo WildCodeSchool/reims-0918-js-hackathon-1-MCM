@@ -38,7 +38,7 @@ class Welcome extends Component {
             backgroundColor: "rgba(250,250,250,0.8)"
           }}
         >
-          Pour démarrer ta quête aux bonbons indique ton Prénom et ta Ville
+          Pour démarrer ta chasse aux bonbons indique ton Prénom et ta Ville
         </h3>
         <Row>
           <Col
