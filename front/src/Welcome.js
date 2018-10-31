@@ -80,18 +80,6 @@ class Welcome extends Component {
               id="exampleSelectMulti"
             >
               <option>Reims</option>
-              <option>Paris</option>
-              <option>Tours</option>
-              <option>Marseille</option>
-              <option>La Loupe</option>
-              <option>Strasbourg</option>
-              <option>Lille</option>
-              <option>Orléans</option>
-              <option>Bordeaux</option>
-              <option>Lyon</option>
-              <option>Toulouse</option>
-              <option>Biarritz</option>
-              <option>Nantes</option>
             </Input>
             <br />
             <button

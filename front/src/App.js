@@ -31,7 +31,7 @@ class App extends Component {
         logoRace:
           "https://banner2.kisspng.com/20180605/pe/kisspng-werewolf-the-apocalypse-gray-wolf-lycanthrope-5b174b545a6429.0270693815282532683703.jpg",
         race: "Werewolf",
-        citycode: 37261
+        citycode: 51454
       },
       candies: [],
       activeTab: "1",
