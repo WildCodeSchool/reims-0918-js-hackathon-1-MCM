@@ -7,7 +7,7 @@ const CandyCard = props => {
       {props.finded ? (
         <Col
           xs="4"
-          style={{ marginBottom: "15px" }}
+          style={{ marginBottom: "15px", cursor: "pointer" }}
           onClick={() => {
             props.candyToModal({ ...props });
           }}
