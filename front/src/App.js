@@ -217,16 +217,36 @@ class App extends Component {
       <div className="App">
         {this.state.isHomeDisplayed ? (
           <Container>
-            <h1>Nom Projet</h1>
-            <div style={{ display: "flex", justifyContent: "space-around" }}>
-              <h2>Joueurs : {this.state.user.name}</h2>
-              <h2>Race : {this.state.user.race}</h2>
-              <h2>Ville : {this.state.user.city}</h2>
-            </div>
-            <Nav tabs className="justify-content-center">
+            <header
+              style={{
+                color: "orange",
+                paddingBottom: "20px"
+              }}
+            >
+              <Row style={{ display: "flex", justifyContent: "space-around" }}>
+                <Col className="my-auto" xs="3">
+                  <h1>Halloween</h1>
+                </Col>
+
+                <Col className="my-auto" xs="3">
+                  <h2>Joueurs : {this.state.user.name}</h2>
+                  <h2>Ville : {this.state.user.city}</h2>
+                </Col>
+              </Row>
+            </header>
+            <Nav
+              tabs
+              className="justify-content-center"
+              style={{ border: "none" }}
+            >
               <NavItem>
                 <NavLink
-                  style={{ cursor: "pointer" }}
+                  style={{
+                    cursor: "pointer",
+                    color: "purple",
+                    backgroundColor: "rgba(250,250,250,0.9)",
+                    fontSize: "20px"
+                  }}
                   className={classnames("navlink", {
                     active: this.state.activeTab === "1"
                   })}
@@ -239,7 +259,12 @@ class App extends Component {
               </NavItem>
               <NavItem>
                 <NavLink
-                  style={{ cursor: "pointer" }}
+                  style={{
+                    cursor: "pointer",
+                    color: "purple",
+                    backgroundColor: "rgba(250,250,250,0.9)",
+                    fontSize: "20px"
+                  }}
                   className={classnames("navlink", {
                     active: this.state.activeTab === "1"
                   })}
@@ -251,7 +276,14 @@ class App extends Component {
                 </NavLink>
               </NavItem>
             </Nav>
-            <TabContent activeTab={this.state.activeTab}>
+            <TabContent
+              activeTab={this.state.activeTab}
+              style={{
+                border: "solid 1px black",
+                borderRadius: "10px",
+                backgroundColor: "rgba(250,250,250,0.8)"
+              }}
+            >
               <TabPane tabId="1">
                 <AdressesList
                   adressesVisited={this.state.adressVisited}
@@ -265,7 +297,7 @@ class App extends Component {
                 />
               </TabPane>
               <TabPane tabId="2">
-                <Row>
+                <Row className="p-3">
                   {this.state.candies.map((candy, index) => (
                     <CandyCard
                       key={index}

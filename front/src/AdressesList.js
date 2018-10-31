@@ -122,7 +122,11 @@ class AdressesList extends Component {
                     <p className="text-secondary">{adresse.properties.name}</p>
                   ) : (
                     <p
-                      style={{ cursor: "pointer" }}
+                      style={{
+                        cursor: "pointer",
+                        color: "purple",
+                        fontSize: "15px"
+                      }}
                       onClick={() => this.changeHouse(adresse, index)}
                     >
                       {adresse.properties.name}

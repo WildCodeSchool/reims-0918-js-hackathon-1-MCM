@@ -1,5 +1,5 @@
 import React, { Fragment } from "react";
-import { Col } from "reactstrap";
+import { Row, Col } from "reactstrap";
 
 const CandyCard = props => {
   return (
@@ -12,63 +12,60 @@ const CandyCard = props => {
             props.candyToModal({ ...props });
           }}
         >
-          <img
-            style={{
-              height: "100px",
-              width: "100px",
-              float: "right",
-              borderRadius: "50%"
-            }}
-            src={props.image}
-            alt="Candypics"
-          />
-
-          <p
-            style={{
-              float: "left",
-              fontWeight: "bold"
-            }}
-          >
-            #{props.numero}
-          </p>
-
-          <p
-            style={{
-              float: "center"
-            }}
-          >
-            {props.name}
-          </p>
+          <Row>
+            <Col className="my-auto" xs="4">
+              <p
+                style={{
+                  fontWeight: "bold"
+                }}
+              >
+                #{props.numero}
+              </p>
+            </Col>
+            <Col className="my-auto" xs="5">
+              <p>{props.name}</p>
+            </Col>
+            <Col className="pr-3" xs="3">
+              <img
+                style={{
+                  height: "75px",
+                  width: "75px",
+                  borderRadius: "50%"
+                }}
+                src={props.image}
+                alt="Candypics"
+              />
+            </Col>
+          </Row>
         </Col>
       ) : (
         <Col xs="4" style={{ marginBottom: "15px" }}>
-          <img
-            style={{
-              filter: "blur(0.3rem)",
-              height: "100px",
-              width: "100px",
-              float: "right",
-              borderRadius: "50%"
-            }}
-            src={props.image}
-            alt="Candypics"
-          />
-
-          <p
-            style={{
-              float: "left",
-              fontWeight: "bold"
-            }}
-          >
-            #{props.numero}
-          </p>
-          <p
-            style={{
-              float: "center"
-            }}
-          >
-            ???
-          </p>
+          <Row>
+            <Col className="my-auto" xs="4">
+              <p
+                style={{
+                  fontWeight: "bold"
+                }}
+              >
+                #{props.numero}
+              </p>
+            </Col>
+            <Col className="my-auto" xs="5">
+              <p>?????</p>
+            </Col>
+            <Col className="pr-3" xs="3">
+              <img
+                style={{
+                  height: "75px",
+                  width: "75px",
+                  borderRadius: "50%",
+                  filter: "blur(0.3rem)"
+                }}
+                src={props.image}
+                alt="Candypics"
+              />
+            </Col>
+          </Row>
         </Col>
       )}
     </Fragment>
