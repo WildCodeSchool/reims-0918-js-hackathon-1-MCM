@@ -26,17 +26,40 @@ class ModalCandy extends Component {
               toggle={this.props.closeModal}
               className={this.props.className}
             >
-              <ModalHeader toggle={this.props.closeModal} close={closeBtn}>
+              <ModalHeader
+                toggle={this.props.closeModal}
+                close={closeBtn}
+                style={{
+                  paddingBottom: "0",
+                  backgroundColor: "black",
+                  color: "white"
+                }}
+              >
                 <p
                   style={{
-                    fontSize: "40px"
+                    fontSize: "40px",
+                    marginBottom: "0"
                   }}
                 >
-                  #{this.props.selectedCandy.numero}{" "}
+                  <span
+                    style={{
+                      fontWeight: "bold",
+                      fontSize: "60px",
+                      paddingRight: "30px"
+                    }}
+                  >
+                    #{this.props.selectedCandy.numero}
+                  </span>{" "}
                   {this.props.selectedCandy.name}
                 </p>
               </ModalHeader>
-              <ModalBody>
+              <ModalBody
+                style={{
+                  textAlign: "center",
+                  backgroundColor: "black",
+                  color: "white"
+                }}
+              >
                 <img
                   style={{
                     height: "400px",
@@ -45,13 +68,24 @@ class ModalCandy extends Component {
                   src={this.props.selectedCandy.image}
                   alt="Candypics"
                 />
-                <p>Trouvé {this.props.selectedCandy.nbFinded} fois</p>
-                <p>
+
+                <p
+                  style={{
+                    fontSize: "20px",
+                    marginTop: "3px"
+                  }}
+                >
+                  Trouvé {this.props.selectedCandy.nbFinded} fois
+                </p>
+                <p
+                  style={{
+                    fontSize: "20px"
+                  }}
+                >
                   Trouvé la première fois au{" "}
                   {this.props.selectedCandy.whereFinded}
                 </p>
               </ModalBody>
-              <ModalFooter>Voici du Footer !</ModalFooter>
             </Modal>
           </Container>
         )}
