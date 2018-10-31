@@ -40,6 +40,7 @@ class Welcome extends Component {
         />
         <p className="font" style={{ color: "#ff7700" }}>
           Pour démarrer ta quête aux bonbons indique ton Prénom et ta Ville
+
         </p>
         <Row>
           <Col xs="6">
@@ -60,7 +61,6 @@ class Welcome extends Component {
             <label className="font" style={{ color: "#ff7700" }}>
               Ville :
               <input
-                className="font"
                 id="city"
                 value={this.props.valeur}
                 placeholder="Entre ta ville !"
@@ -72,7 +72,7 @@ class Welcome extends Component {
 
           <Col>
             <button
-              className="font"
+              className="font mt-5"
               style={{ color: "#ff7700" }}
               onClick={() => {
                 this.props.displayedHome();
