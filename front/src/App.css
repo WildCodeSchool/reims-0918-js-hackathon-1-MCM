@@ -24,6 +24,11 @@
   border-radius: 5px;
   
 }
+body{
+  background: url("images/bg.jpg");
+  background-size: cover;
+
+}
 
 
 .App-link {
