@@ -102,6 +102,7 @@ class AdressesList extends Component {
               </Col>
               <Col xs="12">
                 <Button
+                  className="mb-2"
                   onClick={() => {
                     this.closeDetailHouse();
                     clearCandiesFind();
