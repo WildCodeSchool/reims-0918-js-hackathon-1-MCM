@@ -4,8 +4,7 @@ import { Row, Col, Container, Jumbotron, Image } from "reactstrap";
 class Welcome extends Component {
   render() {
     return (
-      <Container fluid style={{ backgroundColor: "#000000" }}>
-        <Jumbotron fluid style={{ padding: "0", margin: "0" }}>
+      <Container fluid style={{ backgroundColor: "#000000", height:"100vh" }}>
           <img
             src="http://luida.l.u.pic.centerblog.net/gitoi.gif"
             style={{
@@ -21,25 +20,25 @@ class Welcome extends Component {
               width: "150px",
               height: "150px",
               position: "absolute",
-              right: "10px"
+              right: "50px",
+              top: "20px"
             }}
           />
           <img
             src="http://fantazia.f.a.pic.centerblog.net/myspac10.gif"
-            style={{ width: "500px", height: "80px" }}
+            style={{ width: "500px", height: "250px" }}
           />
           <br />
           <img
             src="https://media.giphy.com/media/qUHxAava8vmUg/giphy.gif"
-            style={{ height: "80px" }}
+            style={{ height: "280px" }}
           />
           <p className="font" style={{ color: "#ff7700" }}>
             Pour démarrer ta quête aux bonbons indique ton Nom et ta Ville
           </p>
-        </Jumbotron>
         <Row>
           <Col xs="6">
-            <label className="font" style={{ color: "#ff7700" }}>
+            <label className="font" style={{ color: "#ff7700", width:"100%" }}>
               Nom :
               <input
                 className="font"
