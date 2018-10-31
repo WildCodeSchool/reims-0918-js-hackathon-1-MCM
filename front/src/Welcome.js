@@ -1,12 +1,13 @@
 import React, { Component } from "react";
-import { Row, Col, Container, Jumbotron, Image } from "reactstrap";
+import { Row, Col, Container } from "reactstrap";
 
 class Welcome extends Component {
   render() {
     return (
-      <Container fluid style={{ backgroundColor: "#000000" }}>
+      <Container fluid style={{ backgroundColor: "#000000", height: "100vh" }}>
         <img
           src="http://luida.l.u.pic.centerblog.net/gitoi.gif"
+          alt="araignée"
           style={{
             width: "100px",
             height: "100px",
@@ -16,31 +17,32 @@ class Welcome extends Component {
         />
         <img
           src="http://static.wixstatic.com/media/892d1a_1122740ce9de480aca2bacc7bf7845fb.gif"
+          alt="sorciére"
           style={{
             width: "150px",
             height: "150px",
             position: "absolute",
-            right: "10px"
+            right: "50px",
+            top: "20px"
           }}
         />
         <img
           src="http://fantazia.f.a.pic.centerblog.net/myspac10.gif"
-          style={{ width: "500px", height: "80px" }}
+          alt="titre"
+          style={{ width: "500px", height: "250px" }}
         />
         <br />
         <img
           src="https://media.giphy.com/media/qUHxAava8vmUg/giphy.gif"
-          style={{ height: "80px" }}
+          alt="tete"
+          style={{ height: "280px" }}
         />
-       
-      
-        <p className="font mt-5" style={{ color: "#ff7700" }}>
+        <p className="font mt-3 mb-5" style={{ color: "#ff7700" }}>
           Pour démarrer ta quête aux bonbons indique ton Nom et ta Ville
         </p>
-
         <Row>
           <Col xs="6">
-            <label className="font" style={{ color: "#ff7700" }}>
+            <label className="font" style={{ color: "#ff7700", width: "100%" }}>
               Nom :
               <input
                 className="font"
@@ -67,7 +69,11 @@ class Welcome extends Component {
           </Col>
 
           <Col>
-            <button className="font" style={{ color: "#ff7700" }} onClick={""}>
+            <button
+              className="font mt-5"
+              style={{ color: "#ff7700" }}
+              onClick={() => this.props.displayedHome()}
+            >
               Démarre ta chasse
             </button>
           </Col>
