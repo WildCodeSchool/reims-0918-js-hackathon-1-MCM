@@ -6,10 +6,13 @@ class ModalCandy extends Component {
     const closeBtn = (
       <button
         className="close"
+        style={{ color: "white" }}
         onClick={() => {
           this.props.closeModal();
         }}
-      />
+      >
+        X
+      </button>
     );
     return (
       <div>
