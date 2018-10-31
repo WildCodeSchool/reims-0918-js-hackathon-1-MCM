@@ -40,7 +40,6 @@ class Welcome extends Component {
         />
         <p className="font" style={{ color: "#ff7700" }}>
           Pour démarrer ta quête aux bonbons indique ton Prénom et ta Ville
-
         </p>
         <Row>
           <Col xs="6">
