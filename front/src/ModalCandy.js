@@ -45,6 +45,11 @@ class ModalCandy extends Component {
                   src={this.props.selectedCandy.image}
                   alt="Candypics"
                 />
+                <p>Trouvé {this.props.selectedCandy.nbFinded} fois</p>
+                <p>
+                  Trouvé la première fois au{" "}
+                  {this.props.selectedCandy.whereFinded}
+                </p>
               </ModalBody>
               <ModalFooter>Voici du Footer !</ModalFooter>
             </Modal>
